@@ -13,7 +13,4 @@ public class User {
     private String email;
     private String phoneNo;
     private String encyptPassword;
-    private String profileCode;
-    private String empCode;
 }
-
