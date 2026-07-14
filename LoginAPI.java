@@ -1,29 +1,16 @@
+package com.dockter.appointment.app;
 
-@Service
-public class AuthServiceImpl implements AuthService {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    @Autowired
-    private UserRepository repository;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Override
-    public LoginResponse login(LoginRequest request) {
-
-        User user = repository.findByUsername(request.getUsername())
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"));
-
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid Password");
-        }
-
-        String token = jwtUtil.generateToken(user.getUsername());
-
-        return new LoginResponse(token, "Login Successful");
-    }
+    private String username;
+    private String email;
+    private String phoneNo;
+    private String password;
 }
